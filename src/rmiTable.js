@@ -1,7 +1,5 @@
-import { useMemo } from 'react';
 import {
   MaterialReactTable,
-  useMaterialReactTable,
 } from 'material-react-table';
 
 //nested data is ok, see accessorKeys in ColumnDef below
@@ -53,10 +51,10 @@ const data = [
   },
 ];
 
-const rmiTable = () => {
+const RmiTable = () => {
   //should be memoized or stable
-  const columns = useMemo(
-    () => [
+  const columns =
+    [
       {
         accessorKey: 'name.firstName', //access nested data with dot notation
         header: 'First Name',
@@ -82,16 +80,18 @@ const rmiTable = () => {
         header: 'State',
         size: 150,
       },
-    ],
-    [],
+    ]
+
+
+  return (
+    <>
+      <h1>My first npm package </h1>
+      <MaterialReactTable
+        columns={columns}
+        data={data} />
+
+    </>
   );
-
-  const table = useMaterialReactTable({
-    columns,
-    data, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
-  });
-
-  return <MaterialReactTable table={table} />;
 };
 
-export default rmiTable;
+export default RmiTable;
